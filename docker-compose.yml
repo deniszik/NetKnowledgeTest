@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  netknowledgetest:
+    image: ${DOCKER_REGISTRY-}netknowledgetest
+    build:
+      context: .
+      dockerfile: Dockerfile
