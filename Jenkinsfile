@@ -11,7 +11,7 @@ pipeline {
 
     stage('Publish') {
       steps {
-        sh 'docker build -t ${BUILD_NAME}:latest -e "PUBLISH_PATH=${PUBLISH_PATH}" -f Dockerfile .'
+        sh 'docker build -t ${BUILD_NAME}:latest -f Dockerfile .'
       }
     }
 
