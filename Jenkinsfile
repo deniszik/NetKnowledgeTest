@@ -3,7 +3,8 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        echo 'TEST'
+        sh 'dotnet --version'
+        echo 'DONE'
       }
     }
 
