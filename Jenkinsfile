@@ -9,5 +9,16 @@ pipeline {
       }
     }
 
+    stage('Publish') {
+      steps {
+        sh 'docker build -t ${BUILD_NAME}:latest -e "PUBLISH_PATH=${PUBLISH_PATH}" -f Dockerfile .'
+      }
+    }
+
+  }
+  environment {
+    BUILD_NAME = 'netknowladgetest'
+    BUILD_PATH = './bin/Release'
+    PUBLISH_PATH = './bin/Publish'
   }
 }
