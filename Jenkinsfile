@@ -12,7 +12,7 @@ pipeline {
       steps {
         sh 'dotnet publish NetKnowledgeTest.csproj --configuration Release -o ${PUBLISH_PATH}'
         sh 'docker build -t ${IMAGE_NAME} -f Dockerfile .'
-        sh 'docker push ${IMAGE_NAME} ${NEXUS_URL}/${IMAGE_NAME}'
+        sh 'docker tag ${IMAGE_NAME} ${NEXUS_URL}/${IMAGE_NAME}'
       }
     }
     stage('Cleanup') {
