@@ -12,7 +12,13 @@ pipeline {
       steps {
         sh 'dotnet publish NetKnowledgeTest.csproj --configuration Release -o ${PUBLISH_PATH}'
         sh 'docker build -t ${IMAGE_NAME} -f Dockerfile .'
-        sh 'docker tag ${IMAGE_NAME} ${NEXUS_URL}/${IMAGE_NAME}'
+        sh 'docker push ${IMAGE_NAME} ${NEXUS_URL}/${IMAGE_NAME}
+      }
+    }
+    stage('Cleanup') {
+      steps {
+        sh 'docker image rm ${IMAGE_NAME} -f'
+        sh 'docker image prune -f'
       }
     }
   }
@@ -20,7 +26,7 @@ pipeline {
     BUILD_NAME = 'netknowledgetest'
     BUILD_PATH = './bin/Release'
     PUBLISH_PATH = './bin/Publish'
-    IMAGE_NAME = 'zik/netknowledgetest:latest'
-    NEXUS_URL = '192.168.0.4:10082'
+    IMAGE_NAME = 'netknowledgetest:latest'
+    NEXUS_URL = 'nexus:10082'
   }
 }
