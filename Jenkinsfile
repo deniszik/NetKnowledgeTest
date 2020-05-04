@@ -3,12 +3,11 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        sh 'dotnet restore NetKnowledgeTest.csproj'
-        sh 'dotnet clean NetKnowledgeTest.csproj'
-        sh 'dotnet build NetKnowledgeTest.csproj --configuration Release'
+        sh 'dotnet restore NetKnowledgeTest.csproj -o ${BUILD_PATH}'
+        sh 'dotnet clean NetKnowledgeTest.csproj -o ${BUILD_PATH}'
+        sh 'dotnet build NetKnowledgeTest.csproj --configuration Release -o ${BUILD_PATH}'
       }
     }
-
     stage('Publish') {
       steps {
         sh 'docker build -t ${BUILD_NAME}:latest -f Dockerfile .'
@@ -17,8 +16,7 @@ pipeline {
 
   }
   environment {
-    BUILD_NAME = 'netknowladgetest'
+    BUILD_NAME = 'netknowledgetest'
     BUILD_PATH = './bin/Release'
-    PUBLISH_PATH = './bin/Publish'
   }
 }

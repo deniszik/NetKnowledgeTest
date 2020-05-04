@@ -5,18 +5,19 @@ WORKDIR /app
 EXPOSE 80
 EXPOSE 443
 
-FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
-WORKDIR /src
-COPY ["NetKnowledgeTest.csproj", ""]
-RUN dotnet restore "./NetKnowledgeTest.csproj"
-COPY . .
-WORKDIR "/src/."
-RUN dotnet build "NetKnowledgeTest.csproj" -c Release -o /app/build
+#FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
+#WORKDIR /src
+#COPY ["NetKnowledgeTest.csproj", ""]
+#RUN dotnet restore "./NetKnowledgeTest.csproj"
+#COPY . .
+#WORKDIR "/src/."
+#RUN dotnet build "NetKnowledgeTest.csproj" -c Release -o /app/build
 
-FROM build AS publish
-RUN dotnet publish "NetKnowledgeTest.csproj" -c Release -o /app/publish
+#FROM build AS publish
+#RUN dotnet publish "NetKnowledgeTest.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
-COPY --from=publish /app/publish .
+#COPY --from=publish /app/publish .
+COPY ./bin/Release /app
 ENTRYPOINT ["dotnet", "NetKnowledgeTest.dll"]
