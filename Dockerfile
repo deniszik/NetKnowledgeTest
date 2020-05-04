@@ -16,8 +16,8 @@ EXPOSE 443
 #FROM build AS publish
 #RUN dotnet publish "NetKnowledgeTest.csproj" -c Release -o /app/publish
 
-FROM base AS final
-WORKDIR /app
+#FROM base AS final
+#WORKDIR /app
 #COPY --from=publish /app/publish .
-COPY ./bin/Release /app
+COPY ./bin/Publish .
 ENTRYPOINT ["dotnet", "NetKnowledgeTest.dll"]

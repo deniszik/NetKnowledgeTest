@@ -10,6 +10,7 @@ pipeline {
     }
     stage('Publish') {
       steps {
+        sh 'dotnet publish NetKnowledgeTest.csproj --configuration Release -o ${PUBLISH_PATH}'
         sh 'docker build -t ${BUILD_NAME}:latest -f Dockerfile .'
       }
     }
@@ -18,5 +19,6 @@ pipeline {
   environment {
     BUILD_NAME = 'netknowledgetest'
     BUILD_PATH = './bin/Release'
+    PUBLISH_PATH = './bin/Publish'
   }
 }
