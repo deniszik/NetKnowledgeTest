@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        sh 'dotnet restore NetKnowledgeTest.csproj -o ${BUILD_PATH}'
+        sh 'dotnet restore NetKnowledgeTest.csproj'
         sh 'dotnet clean NetKnowledgeTest.csproj -o ${BUILD_PATH}'
         sh 'dotnet build NetKnowledgeTest.csproj --configuration Release -o ${BUILD_PATH}'
       }
