@@ -27,6 +27,6 @@ pipeline {
     BUILD_PATH = './bin/Release'
     PUBLISH_PATH = './bin/Publish'
     IMAGE_NAME = 'netknowledgetest:latest'
-    NEXUS_URL = 'nexus:10082'
+    NEXUS_URL = 'nexus:10083'
   }
 }
