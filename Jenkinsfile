@@ -12,7 +12,7 @@ pipeline {
       steps {
         sh 'dotnet publish NetKnowledgeTest.csproj --configuration Release -o ${PUBLISH_PATH}'
         sh 'docker build -t ${IMAGE_NAME} -f Dockerfile .'
-        sh 'docker tag ${IMAGE_NAME} ${NEXUS_URL}/${IMAGE_NAME}'
+        sh 'docker push ${NEXUS_URL}/${IMAGE_NAME}'
       }
     }
     stage('Cleanup') {
@@ -27,6 +27,6 @@ pipeline {
     BUILD_PATH = './bin/Release'
     PUBLISH_PATH = './bin/Publish'
     IMAGE_NAME = 'netknowledgetest:latest'
-    NEXUS_URL = 'nexus:10082'
+    NEXUS_URL = 'nexus:10083'
   }
 }
